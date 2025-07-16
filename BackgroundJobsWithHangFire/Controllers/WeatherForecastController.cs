@@ -24,8 +24,17 @@ namespace BackgroundJobsWithHangFire.Controllers
         {
             //immediatly
             // BackgroundJob.Enqueue(()=>SendMessages( "raqya18200@gmail.com"));
-            Console.WriteLine(DateTime.Now);
-            BackgroundJob.Schedule(() => SendMessages("raqya18200@gmail.com"),TimeSpan.FromMinutes(1));
+            // Console.WriteLine(DateTime.Now);
+            //  BackgroundJob.Schedule(() => SendMessages("raqya18200@gmail.com"),TimeSpan.FromMinutes(1));
+
+
+            //every month intro 
+            //RecurringJob.AddOrUpdate(() => SendMessages("raqya18200@gmail.com"), Cron.Monthly(1));
+
+            //at least call it once
+
+            RecurringJob.AddOrUpdate(() => SendMessages("raqya18200@gmail.com"), Cron.Minutely);
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
